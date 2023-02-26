@@ -1,0 +1,45 @@
+{% extends 'registration_form/base.html' %}
+
+{% if user.is_authenticated %}
+
+{% for message in messages %}
+<div class="container alert alert-{{ message.tags }}">
+    {{message}}
+</div>
+
+
+{% endfor %}
+{% endif %}
+
+{% block content %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-1">
+            <h2>Hello there!</h2>
+            <div class="form-container">
+                <h3>Login</h3>
+                <form action="{% url 'loginuser' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group py-1">
+                        <label for="username">Username:</label>
+                        <input type="text" class="form-control" id="email" placeholder="Enter Username" name="username" >
+                    </div>
+                    <div class="form-group py-2">
+                        <label for="password">Password:</label>
+                        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password" >
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+                <div class="border-top pt-3">
+                    <small class="text-muted">
+                        Need an account? <a href="/signup">Sign Up</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {% endblock content %}
